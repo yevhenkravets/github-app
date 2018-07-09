@@ -1,0 +1,9 @@
+{
+  "apps": [
+    {
+      "name": "github-app",
+      "script": "npm",
+      "args" : "start"
+    }
+  ]
+}
