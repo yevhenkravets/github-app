@@ -39,9 +39,23 @@ const ApiService = {
       .catch(this._handleError);
   },
   sendEmails(usernames, message) {
-    return axios.post(`${API_URL}/api/v1/github/send-emails`, { usernames, message })
+    const config = {
+      url: `${API_URL}/api/v1/github/send-emails`,
+      method: 'post',
+      data: { usernames, message },
+      headers: {
+        Authorization: auth.getToken()// || 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjQwZWE1ZGYzZjg3YzRhOTE2MGExYjkiLCJlbWFpbCI6ImdyaWdvcmlldi5hbGVrc0BnbWFpbC5jb20iLCJhdmF0YXJVcmwiOiJodHRwOi8vMTk0LjQ0LjI1My43ODo2MDMwL0RTQzA2OTgwLkpQRyIsImlhdCI6MTUzMTEzMDQ1NX0.ryLCt5pPzfFr-tdc9kA5AvJ1C51eqI70qP3TQHYLvzs'
+      }
+    };
+    return axios(config)
       .then(res => res.data)
-      .then(data => notification.$emit('success', 'Success'))
+      .then(data => {
+        const result = data.reduce((a, b) => {
+          const localResult = `${b.username} - email: ${b.email}, sent: ${b.emailSent.success}, with weather: ${b.emailSent.success}\n`;
+          return a + localResult;
+        }, '');
+        notification.$emit('success', result);
+      })
       .catch(this._handleError);
   }
 };

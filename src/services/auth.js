@@ -13,7 +13,7 @@ class Token {
     if (!this.token) {
       return '';
     }
-    return `JWT ${!this.token}`
+    return `JWT ${this.token}`
   }
 }
 

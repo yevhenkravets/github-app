@@ -26,12 +26,12 @@ export default  {
   data() {
     return {
       loginData: {
-        username: 'grigoriev.aleks@gmail.com',
-        password: 'alex1234'
+        username: '',
+        password: ''
       },
       registerData: {
-        email: 'leopesyk@ukr.net',
-        password: 'peolesyk'
+        email: '',
+        password: ''
       },
       selectedFile: null,
     }
@@ -56,7 +56,7 @@ export default  {
       ApiService.login(this.loginData.username, this.loginData.password)
         .then((data) => {
           console.log(data);
-          this.$router.push('/send-email')
+          this.$router.push('/send-emails')
         });
     },
   },

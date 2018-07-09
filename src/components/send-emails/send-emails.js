@@ -63,7 +63,7 @@ export default  {
         this.$emit('error', 'Please, add one or more account');
         return false;
       }
-      if (!this.message()) {
+      if (!this.message) {
         this.$emit('error', 'Please, write a message');
         return false;
       }
@@ -72,7 +72,7 @@ export default  {
     sendEmails() {
       if (this.validate()) {
         ApiService.sendEmails(this.accounts, this.message)
-          .then(() => this.$emit('success', 'Success'))
+          //.then(() => this.$emit('success', 'Success'))
           .catch(e => this.$emit('error', e.message));
       }
     },
