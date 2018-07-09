@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="todolist not-done autocomplete">
+        <h1>Send emails to Github accounts</h1>
+        <input type="text"
+               class="form-control add-todo"
+               placeholder="github username"
+               autofocus
+               @input="doAutocomplete"
+               v-model="username">
+        <ul class="autocomplete-results" v-show="autocomplete.length">
+          <li class="autocomplete-result"
+              @click="addAccount(item)"
+              v-for="item in autocomplete">
+            {{item}}
+          </li>
+        </ul>
+        <br>
+        <!--<button class="btn btn-success" @click="addAccount">add username</button> @keyup.enter="addAccount"-->
+        <hr>
+        <h3>Users:</h3>
+        <ul id="sortable" class="list-unstyled">
+          <li v-for="item in accounts" class="result">
+            <span>{{item}}</span>
+            <button class="remove-item btn btn-default btn-xs"
+                    @click="removeAccount(item)">
+              X
+            </button>
+          </li>
+        </ul>
+        <hr>
+        <h3>Message</h3>
+        <div class="form-group shadow-textarea">
+          <textarea class="form-control z-depth-1"
+                    rows="3"
+                    placeholder="Write something here..."
+                    v-model.trim="message">
+          </textarea>
+        </div>
+        <button class="btn btn-success" @click="addAccount">SEND</button>
+      </div>
+    </div>
+  </div>
+</div>
